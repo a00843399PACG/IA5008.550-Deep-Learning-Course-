@@ -232,10 +232,9 @@ def compute_cost(a3, Y):
     cost - value of the cost function
     """
     m = Y.shape[1]
-    
-    logprobs = np.multiply(-np.log(a3),Y) + np.multiply(-np.log(1 - a3), 1 - Y)
+    a3 = np.clip(a3, 1e-8, 1 - 1e-8)
+    logprobs = np.multiply(-np.log(a3), Y) + np.multiply(-np.log(1 - a3), 1 - Y)
     cost = 1./m * np.nansum(logprobs)
-    
     return cost
 
 def load_dataset():
